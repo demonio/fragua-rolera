@@ -1,0 +1,25 @@
+
+<form method="post">
+    <fieldset>
+		<legend>Origen</legend>
+		Clave: <?=_::v($box, 'slug')?><br>
+		<br>
+		Nombre:<br>
+		<input name="name" value="<?=_::v($box, 'name')?>"><br>
+		<br>
+		Código:<br>
+		<textarea class="materialize-textarea" name="code"><?=_::v($box, 'code')?></textarea>
+	</fieldset>
+    <fieldset>
+		<legend>Destino</legend>
+		<select name="target">
+			<option<?=(_::v($box, 'target')=='db')?' selected':''?> value="db">Base de datos</option>
+			<option<?=(_::v($box, 'target')=='file')?' selected':''?> value="file">Archivo</option>
+		</select>
+	</fieldset>
+	<a class="btn blue darken-1" href="/admin/boxes">NEW</a>
+	<button class="btn green darken-1" name="action" value="create">CREATE</button>
+	<button class="btn orange darken-1" name="action" value="update">UPDATE</button>
+	<input type="hidden" name="id" value="<?=_::v($box, 'id')?>">
+</form>
+<br>

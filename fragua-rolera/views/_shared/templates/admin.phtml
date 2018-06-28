@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html id="important">
+    <head>
+        <link href="/css/prism.css" rel="stylesheet" />
+        <link href="/css/material-icons.css" rel="stylesheet">
+        <link href="/css/materialize.min.css" rel="stylesheet">
+        <link href="/css/hacks.css" rel="stylesheet">
+        <link href="/css/helpers.css" rel="stylesheet">
+        <link href="/css/kuwy.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body class="row">
+        <div class="overlay" data-hide="aside, .overlay" id="overlay" ondragover="hide('aside, .overlay')"></div>
+
+        <h1 class="center-align mt10">KuBox <sup>v3</sup></h1>
+        <h2 class="black white-text center-align mb5 pb10">Be a box my friend</h2>
+
+        <aside class="col s0 m0 l3 left files">
+            <?php View::partial('files'); ?>
+        </aside>
+        <a class="btn-floating btn-large black s m l0" data-toggle="aside.files, .overlay" style="position:fixed; left:-10px; top:-10px; z-index:8;"><i class="material-icons">menu</i></a>
+
+        <main class="col s12 m12 l6">
+            <?php View::content(); ?>
+        </main>
+
+        <aside class="col s0 m0 l3 right boxes">
+            <?php View::partial('boxes', false, ['boxes'=>$boxes, 'dir'=>$dir, 'file'=>$file]); ?>
+        </aside>
+        <a class="btn-floating btn-large black s m l0" data-toggle="aside.boxes, .overlay" style="position:fixed; right:-10px; top:-10px; z-index:8;"><i class="material-icons">menu</i></a>
+
+        <script src="/javascript/jquery-3.3.1.min.js"></script>
+        <script src="/javascript/materialize.min.js"></script>
+        <script src="/javascript/kuwy.js"></script>
+        <script src="/javascript/prism.js"></script>
+        <script src="/javascript/function.js"></script>
+        <script src="/javascript/script.js"></script>
+        
+        <?php View::partial('toast'); ?>
+    </body>
+</html>

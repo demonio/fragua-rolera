@@ -1,0 +1,60 @@
+
+#boxes { padding:10px; }
+
+a:hover:not(.btn) { color:red;}
+
+aside
+{
+	background:white;
+    height:100%; overflow-y:auto; width:312px;
+}
+
+.drop-container { border:4px dashed grey; }
+/*.drop-container::after { color:grey; content:'DROP HERE!'; }*/
+
+#important * { margin-bottom:0px; margin-top:0px; }
+
+fieldset { border:1px dashed grey; margin-top:5px !important; position:relative; }
+fieldset .delete { position:absolute; right:0; top:9px; width:17px; }
+
+legend { border:1px dashed grey; padding:0 10px; }
+
+.overlay
+{
+	background:black;
+	display:none;
+    height:120vh; width:100%;
+    opacity:0.5;
+    position:fixed; left:0; top:0;  z-index:997;
+}
+
+.tabs a { color:black !important; font-variant:small-caps; text-transform:capitalize; }
+
+@media (max-width: 600px)
+{
+	aside.s0
+	{
+		height:100%; width:275px;
+		position:fixed; top:0; z-index:998;
+	}
+
+	aside.left { left:0; }
+	aside.right { right:0; }
+}
+
+@media (min-width: 601px) and (max-width: 992px)
+{
+	aside.m0
+	{
+		height:100%; width:275px;
+		position:fixed; top:0; z-index:998;
+	}
+
+	aside.left { left:0; }
+	aside.right { right:0; }
+}
+
+@media (min-width: 993px)
+{
+
+}

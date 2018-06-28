@@ -1,0 +1,64 @@
+
+<h3>Files</h3>
+<?php
+# SEPARADOR SEGUN SISTEMA
+$ds = DIRECTORY_SEPARATOR;
+# RUTA RAIZ DEL PROYECTO
+$abs = dirname(APP_PATH);
+# DIRECTORIO A MOSTRAR EN PANTALLA Y URL
+$dir = empty($_GET['dir']) ? $ds : $_GET['dir'];
+$file = empty($_GET['file']) ? '' : $_GET['file'];
+# ACCIÓN DE SUBIR UN DIRECTORIO
+if ( ! empty($_GET['up']) )
+{
+    $dir = trim($dir, $ds);
+    $a = explode($ds, $dir);
+    array_pop($a);
+    $dir = $ds;
+    foreach ($a as $s) $dir .= "$s$ds";
+}
+# RUTA RAIZ DEL PROYECTO SI LA RUTA ENVIADA NO ÉXISTE
+if ( ! file_exists("$abs$dir") ) $dir = $ds;
+# CADA CARPETA ES UN ENLACE
+if ($dir <> $ds) :
+    echo "<a href=\"?dir=$ds\">$ds</a>";
+    $dirs = explode( $ds, trim($dir, $ds) );
+    empty($dirs) ? '' : $path = $ds;
+    foreach ($dirs as $s) :
+        ?><a href="?dir=<?=$path .= "$s/"?>"><?=$s?></a>/<?php
+    endforeach;
+else :
+    echo "<a href=\"?dir=$ds\">$ds</a>";
+endif; ?>
+<br>
+<a href="?dir=<?=$dir?>&up=1">..</a>
+<?php
+$d = [];
+foreach (glob("$abs$dir*", GLOB_ONLYDIR) as $f) :
+    $size = filesize($f);
+    $f = str_replace("$abs$dir", '', $f);
+    $d[] = $f;
+    ?>
+    <div class="box valign-wrapper">
+        <i class="material-icons mr5 tiny">folder</i>
+        <a href="?dir=<?="$dir$f$ds"?>"><?=$f?></a>
+    </div>
+<?php endforeach;
+foreach (glob("$abs$dir*") as $f) :
+    $size = filesize($f);
+    $f = str_replace("$abs$dir", '', $f);
+    if ( in_array($f, $d) ) continue; ?>
+    <div class="box valign-wrapper">
+        <i class="material-icons mr5 tiny">subdirectory_arrow_right</i>
+        <a class="<?=($f==$file)?' yellow':''?>" href="?dir=<?=$dir?>&file=<?=$f?>"><?=$f?></a>
+        <sup class="ml5"><em><?=$size?></em></sup>
+    </div>
+<?php endforeach;
+
+/* ALGUNAS NOTAS:
+$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($pathname));
+
+foreach($iterator as $item) {
+    chmod($item, $filemode);
+}
+*/

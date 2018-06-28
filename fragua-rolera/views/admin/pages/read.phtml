@@ -1,0 +1,22 @@
+
+<form method="post">
+    <div>
+        <label>Caja:</label>
+        <div><?=$box->name?></div>
+    </div>
+    <div>
+        <?php
+        $a = explode('<?=$', $box->code);
+        array_shift($a);
+        foreach ($a as $s) :
+            $k = explode('?>', $s, 2)[0]; ?>
+            <label><?=ucfirst($k)?>:</label>
+            <input type="text" name="<?=$k?>" value="<?=$box->variables[$k]?>">
+        <?php endforeach; ?>
+    </div>
+    <div>
+        <button class="btn orange darken-1" name="action" value="save_variables">SAVE</button>
+	    <a class="btn blue darken-1" href="/admin/pages/?dir=<?=$box->dir?>&file=<?=$box->file?>">¿OK?</a>
+    </div>
+    <input type="hidden" name="boxes_id" value="<?=$box->id?>">
+</form>

@@ -1,0 +1,79 @@
+
+<form method="post">
+	<ul class="tabs">
+		<li class="tab"><a href="#boxes">Boxes</a></li>
+		<li class="tab"><a href="#code">Code</a></li>
+		<li class="tab"><a href="#view">View</a></li>
+	</ul>
+	<input type="text" name="file_new" value="<?=$file?>">
+	<div id="boxes" ondrop="drop(event)" ondragover="dropin(event)" ondragleave="dropout(event)">
+		<?php echo Mount::boxes($page_boxes); ?>
+	</div>
+	<div id="code">
+		<?php if ( ! preg_match('/gif|png|jpeg|jpg/i', $ext) ) : ?>
+			<pre class="line-numbers"><code class="language-<?=(!$ext or $ext=='phtml')?'php':$ext?>"><?=str_replace('<', '&lt;', $code)?></code></pre>
+			<?php endif; ?>	
+	</div>
+	<div id="view">
+		<?php if ( preg_match('/gif|png|jpeg|jpg|svg/i', $ext) ) : ?>
+			<img src="<?=strstr($dir, '/img')?><?=$file?>">
+		<?php endif; ?>
+	</div>
+
+	<a class="btn blue darken-1" href="/admin/pages/?dir=<?=$dir?>">NEW</a>
+	<button class="btn green darken-1" name="action" value="create_file">CREATE</button>
+	<button class="btn orange darken-1" name="action" value="update_file">UPDATE</button>
+	<button class="btn red darken-1 ph5 right" name="action" value="delete_file"><i class="material-icons">delete_forever</i></button>
+</form>
+
+<?php
+/*
+<hr>
+<?php echo Session::get('msg'); Session::delete('msg'); ?>
+<hr>
+<form method="post">
+	Id: <?=_::v($page, 'id')?>
+	<input type="hidden" name="id" value="<?=_::v($page, 'id')?>"><br>
+	<br>
+	Módulo:<br>
+	<input name="url_module" value="<?=_::v($page, 'url_module')?>"><br>
+	<br>
+	Controlador:<br>
+	<input name="url_controller" value="<?=_::v($page, 'url_controller')?>"><br>
+	<br>
+	Acción:<br>
+	<input name="url_action" value="<?=_::v($page, 'url_action')?>"><br>
+	<br>
+	Caja padre:<br>
+	<select name="box_parent">
+		<option></option>
+		<?php foreach ($boxes as $o) : ?>
+			<option<?=(_::v($page, 'box_parent')==$o->slug)?' selected':''?> value="<?=$o->slug?>"><?=$o->name?></option>
+		<?php endforeach; ?>
+	</select><br>
+	<br>
+	Caja:<br>
+	<select name="box">
+		<option></option>
+		<?php foreach ($boxes as $o) : ?>
+			<option<?=(_::v($page, 'box')==$o->slug)?' selected':''?> value="<?=$o->slug?>"><?=$o->name?></option>
+		<?php endforeach; ?>
+	</select><br>
+	<br>
+	Peso:<br>
+	<input name="box_weight" value="<?=_::v($page, 'box_weight')?>"><br>
+	<br>
+	Ancho:<br>
+	<select name="box_width">
+		<option></option>
+		<?php for ($w=12; $w>0; --$w) : ?>
+	 		<option<?=(_::v($page, 'box_width')==$w)?' selected':''?> value="<?=$w?>"><?=$w?></option>
+	 	<?php endfor; ?>
+	</select><br>
+	<br>
+	<a href="/admin/pages">NEW</a>
+	<button name="action" value="create">CREATE</button>
+	<button name="action" value="update">UPDATE</button>
+	<input type="hidden" name="id" value="<?=_::v($page, 'id')?>">
+</form>
+*/

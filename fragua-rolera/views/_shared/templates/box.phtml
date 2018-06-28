@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html id="important">
+    <head>
+        <link href="/css/prism.css" rel="stylesheet" />
+        <link href="/css/material-icons.css" rel="stylesheet">
+        <link href="/css/materialize.min.css" rel="stylesheet">
+        <link href="/css/hacks.css" rel="stylesheet">
+        <link href="/css/helpers.css" rel="stylesheet">
+        <link href="/css/kuwy.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body class="row">
+        <div class="overlay" data-hide="aside, .overlay" id="overlay" ondragover="hide('aside, .overlay')"></div>
+
+        <h1 class="center-align mt10">KuBox <sup>v3</sup></h1>
+        <h2 class="black white-text center-align mb5 pb10">Configure the box</h2>
+
+        <main class="col s12 m12 l12">
+            <?php View::content(); ?>
+        </main>
+
+        <script src="/javascript/jquery-3.3.1.min.js"></script>
+        <script src="/javascript/materialize.min.js"></script>
+        <script src="/javascript/kuwy.js"></script>
+        <script src="/javascript/prism.js"></script>
+        <script src="/javascript/function.js"></script>
+        <script src="/javascript/script.js"></script>
+        
+        <?php View::partial('toast'); ?>
+    </body>
+</html>
