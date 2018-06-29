@@ -36,7 +36,7 @@ $(function()
         $(to).toggle();
     });
 
-    /* MUESTRA Y OCULTA ALGO */
+    /* AÑADE UN TAB EN UN TEXTAREA */
     $('body').on('keydown', 'textarea', function()
     {
         if (event.keyCode===9)
