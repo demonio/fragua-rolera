@@ -36,6 +36,18 @@ $(function()
         $(to).toggle();
     });
 
+    /* MUESTRA Y OCULTA ALGO */
+    $('body').on('keydown', 'textarea', function()
+    {
+        if (event.keyCode===9)
+        {
+            var v=this.value,s=this.selectionStart,e=this.selectionEnd;
+            this.value=v.substring(0, s)+'\t'+v.substring(e);
+            this.selectionStart=this.selectionEnd=s+1;
+            return false;
+        }
+    });
+
     /* CARGA CONTENIDO EN UN MODAL Y LO ABRE
     $('body').on('click', '.load-modal', function(e)
     {
