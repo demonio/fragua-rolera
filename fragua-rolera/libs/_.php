@@ -45,6 +45,12 @@ class _
 		return $s;
 	}
 
+	# CONVIERTE NOMBRES EN CLAVES ÚNICAS DE 8 CARACTERES
+    static public function shorten($s)
+    {
+        return substr(md5(time().$s), 0, 8);
+	}
+
     # RETORNA EL VALOR DE LA PROPIEDAD DEL OBJETO O SU CLAVE POST
     static public function v($o, $k)
     {

@@ -25,10 +25,10 @@ class Pages extends LiteRecord
     {
         foreach($boxes as $id=>$o)
         {
-            if ($o->box_parent <> $box_parent) continue;
+            if ($o->pages_id <> $box_parent) continue;
             unset($boxes[$id]);
             $a[$id] = $o;
-            $a[$id]->childrens = $this->mount($boxes, $o->box);
+            $a[$id]->childrens = $this->mount($boxes, $o->id);
         }
         if ( ! empty($a) ) return $a;
     }
@@ -39,14 +39,14 @@ class Pages extends LiteRecord
     {
         $dir = $get['dir'];
         $file = $get['file'];
-        $sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';
+        $sql = 'SELECT *, b.id as boxes_id FROM boxes b, pages p WHERE p.boxes_id=b.id AND p.dir=? AND p.file=? ORDER BY p.box_weight';
         $page_boxes = $this->all($sql, [$dir, $file]);
         if ( ! $page_boxes ) return [];
         $boxes = (new Boxes)->readAll();
         foreach ($page_boxes as $o)
         {
-            if ( ! empty($boxes[$o->box]) ) $o->code = $boxes[$o->box]->code;
-            $a[$o->box] = $o;
+            if ( ! empty($boxes[$o->boxes_id]) ) $o->code = $boxes[$o->boxes_id]->code;
+            $a[$o->id] = $o;
         }
         #_::d($a);
         return $this->mount($a);
@@ -56,7 +56,7 @@ class Pages extends LiteRecord
      */
     public function readOne($id)
     {
-        $sql = 'SELECT *, p.id as pages_id FROM pages p, boxes b WHERE p.id=? AND p.box=b.slug';
+        $sql = 'SELECT *, p.id as pages_id FROM pages p, boxes b WHERE p.id=? AND p.boxes_id=b.id';
         $o = $this->first($sql, [$id]);
 
         $sql = 'SELECT * FROM variables WHERE boxes_id=?';
@@ -157,5 +157,25 @@ class Pages extends LiteRecord
         $this->query($sql, [$dir, $file]);
 
         return $dir;
+    }
+    
+    /**
+     */
+    public function weightDown($a)
+    {
+        $weight = ( (int)$a['box_weight'] < 1 ) ? 0 : $a['box_weight']-1;
+        $id = (int)$a['id'];
+        $sql = 'UPDATE pages SET box_weight=? WHERE id=?';
+        $this->query($sql, [$weight, $id]);
+    }
+    
+    /**
+     */
+    public function weightUP($a)
+    {
+        $weight = ( (int)$a['box_weight'] < 1 ) ? 1 : $a['box_weight']+1;
+        $id = (int)$a['id'];
+        $sql = 'UPDATE pages SET box_weight=? WHERE id=?';
+        $this->query($sql, [$weight, $id]);
     }
 }

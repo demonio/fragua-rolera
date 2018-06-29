@@ -3,10 +3,10 @@
 
 <ul class="collection">
     <?php foreach ($boxes as $o) : ?>
-        <li class="collection-item pa5" draggable="true" ondragstart="drag(event)" data-href="/admin/pages/?action=create&dir=<?=$dir?>&file=<?=$file?>&box=<?=$o->slug?>">
+        <li class="collection-item pa5" draggable="true" ondragstart="drag(event)" data-href="/admin/pages/?action=create&dir=<?=$dir?>&file=<?=$file?>&boxes_id=<?=$o->id?>">
             <a class="secondary-content" href="/admin/boxes/delete/<?=$o->id?>"><i class="material-icons red-text tiny">close</i></a>
             <i class="grey-text material-icons tiny">menu</i>
-            <a href="/admin/boxes/index/<?=$o->slug?>"><?=$o->name?></a>
+            <a href="/admin/boxes/index/<?=$o->id?>"><?=$o->name?></a>
         </li>
     <?php endforeach; ?>
 </ul>

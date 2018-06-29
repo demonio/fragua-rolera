@@ -88,4 +88,16 @@ class PagesController extends AdminController
     {
         $b = (new Variables)->saveVariables($a);
     }
+
+    #
+    public function weight_down($a)
+    {
+        $b = (new Pages)->weightDown($a);
+    }
+
+    #
+    public function weight_up($a)
+    {
+        $b = (new Pages)->weightUp($a);
+    }
 }

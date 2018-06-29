@@ -59,7 +59,7 @@ function drop(ev)
     $('#'+ev.target.id).removeClass('drop-container');
     var url = ev.dataTransfer.getData('text');
     var parent = ev.target.dataset.parent;
-    if (parent !== undefined) url += '&box_parent='+parent;
+    if (parent !== undefined) url += '&pages_id='+parent;
     location.href = url;
 }
 

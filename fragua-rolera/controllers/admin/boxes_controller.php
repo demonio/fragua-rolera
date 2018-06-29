@@ -19,7 +19,7 @@ class BoxesController extends AdminController
     	$this->boxes = (new Boxes)->readAll();
         $this->dir = empty($_GET['dir']) ? '': $_GET['dir'];
         $this->file = empty($_GET['file']) ? '': $_GET['file'];
-    	if ( empty($this->box) ) $this->box = (new Boxes)->readOne($box_slug);
+        if ( empty($this->box) ) $this->box = (new Boxes)->readOne($box_slug);
     }
 
     #
