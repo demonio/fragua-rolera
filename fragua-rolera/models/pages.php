@@ -8,6 +8,7 @@ class Pages extends LiteRecord
     public function createOne($a)
     {
         unset($a['id']);
+        $a['box_weight'] = 1;
     	$this->create($a);
         return $this;
     }
@@ -163,7 +164,7 @@ class Pages extends LiteRecord
      */
     public function weightDown($a)
     {
-        $weight = ( (int)$a['box_weight'] < 1 ) ? 0 : $a['box_weight']-1;
+        $weight = ( (int)$a['box_weight'] < 2 ) ? 1 : $a['box_weight']-1;
         $id = (int)$a['id'];
         $sql = 'UPDATE pages SET box_weight=? WHERE id=?';
         $this->query($sql, [$weight, $id]);
@@ -177,5 +178,15 @@ class Pages extends LiteRecord
         $id = (int)$a['id'];
         $sql = 'UPDATE pages SET box_weight=? WHERE id=?';
         $this->query($sql, [$weight, $id]);
+    }
+    
+    /**
+     */
+    public function width($id, $a)
+    {
+        $width = h($a['box_width']);
+        $sql = 'UPDATE pages SET box_width=? WHERE id=?';
+        $this->query($sql, [$width, (int)$id]);
+        return $width;
     }
 }

@@ -1,0 +1,11 @@
+<?php
+$tog = empty($tog) ? "$col$row->id" : $tog;
+$val1 = empty($row)
+	? ''
+	: ( ! isset($val) ? $row->$col : $val );
+$val2 = ! isset($val1) ? "¿$col?" : $val1;
+?>
+<form action="<?=$url?>" class="<?=$tog?>" data-ajax="span.<?=$tog?>" method="post" style="display:none">
+	<textarea class="materialize-textarea" name="<?=$col?>"><?=$val1?></textarea>
+	<button type="sumbit" data-toggle=".<?=$tog?>"><i class="material-icons tiny">check</i></button>
+</form><span class="<?=$tog?>"><?=$val2?></span>

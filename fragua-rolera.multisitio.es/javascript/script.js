@@ -4,7 +4,7 @@ $(document).ajaxStart(function()
 });
 $(document).ajaxComplete(function()
 {
-    materialize();
+    M.AutoInit();
 });
 
 $(window).resize(function()
@@ -34,6 +34,14 @@ $(function()
     {
         var to = $(this).data('toggle');
         $(to).toggle();
+    });
+
+    /* MUESTRA Y OCULTA ALGO CON DOBLE CLICK */
+    $('body').on('dblclick', '[data-toggle2]', function()
+    {
+        var to = $(this).data('toggle2');
+        $(to).toggle();
+        $(this).find('input, textarea').focus();
     });
 
     /* AÑADE UN TAB EN UN TEXTAREA */

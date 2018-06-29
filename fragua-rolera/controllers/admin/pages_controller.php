@@ -100,4 +100,10 @@ class PagesController extends AdminController
     {
         $b = (new Pages)->weightUp($a);
     }
+
+    #
+    public function width($id)
+    {
+        $this->width = (new Pages)->width($id, $_POST);
+    }
 }
