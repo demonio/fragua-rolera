@@ -55,18 +55,19 @@ class Pages extends LiteRecord
     
     /**
      */
-    public function readOne($id)
+    public function readOne($pages_id)
     {
         $sql = 'SELECT *, p.id as pages_id FROM pages p, boxes b WHERE p.id=? AND p.boxes_id=b.id';
-        $o = $this->first($sql, [$id]);
-
-        $sql = 'SELECT * FROM variables WHERE boxes_id=?';
-        $variables = $this->all($sql, [$o->id]);
+        $o = $this->first($sql, [$pages_id]);
+        $sql = 'SELECT * FROM variables WHERE pages_id=?';
+        $variables = $this->all($sql, [$pages_id]);
+        $a = [];
         foreach ($variables as $variable)
         {
             $a[$variable->k] = $variable->v;
         }
         $o->variables = $a;
+        #_::d($o);
         return $o;
     }
     
@@ -96,52 +97,53 @@ class Pages extends LiteRecord
         $content = Mount::page($boxes);
         file_put_contents(dirname(APP_PATH) . "$dir$file_new", $content);
 
-        $sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';
+        /*$sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';
         $page_boxes = $this->all($sql, [$dir, $file]);
 
         $sql = "DELETE FROM pages WHERE dir=? AND file=?";
         $this->query($sql, [$dir, $file_new]);
 
-        $sql = "INSERT INTO pages (dir, file, box_parent, box, box_weight, box_width) VALUES\n";
+        $sql = "INSERT INTO pages (pages_id, boxes_id, dir, file, box_weight, box_width) VALUES\n";
         foreach ($page_boxes as $o)
         {
-            $sql .= $s = " ('$dir', '$file_new', '$o->box_parent', '$o->box', '$o->box_weight', '$o->box_width'),\n";
+            $sql .= $s = " ('$o->pages_id', '$o->boxes_id', '$dir', '$file_new', '$o->box_weight', '$o->box_width'),\n";
         }        
         $sql = rtrim($sql, ",\n");
         #_::d($sql);
         $r = $this->query($sql)
             ? Session::setArray('toast', 'Cajas creadas en base de datos.')
-            : Session::setArray('toast', 'Error creando cajas en base de datos.');
+            : Session::setArray('toast', 'Error creando cajas en base de datos.');*/
     
         return (object)['dir'=>$dir, 'file'=>$file_new];
     }
     
     /**
      */
-    public function updateFile($post)
+    public function updateFile($a)
     {
-        $dir = $post['dir'];
-        $file = $post['file'];
-        $boxes = $this->readBoxes($post);
+        $dir = $a['dir'];
+        $file = $a['file'];
+
+        $boxes = $this->readBoxes($a);
         $content = Mount::page($boxes);
         file_put_contents(dirname(APP_PATH) . "$dir$file", $content);
 
-        $sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';
+        /*$sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';
         $page_boxes = $this->all($sql, [$dir, $file]);
 
         $sql = "DELETE FROM pages WHERE dir=? AND file=?";
         $this->query($sql, [$dir, $file]);
 
-        $sql = "INSERT INTO pages (dir, file, box_parent, box, box_weight, box_width) VALUES\n";
+        $sql = "INSERT INTO pages (pages_id, boxes_id, dir, file, box_weight, box_width) VALUES\n";
         foreach ($page_boxes as $o)
         {
-            $sql .= $s = " ('$dir', '$file', '$o->box_parent', '$o->box', '$o->box_weight', '$o->box_width'),\n";
+            $sql .= $s = " ('$o->pages_id', '$o->boxes_id', '$dir', '$file', '$o->box_weight', '$o->box_width'),\n";
         }        
         $sql = rtrim($sql, ",\n");
         #_::d($sql);
         $r = $this->query($sql)
             ? Session::setArray('toast', 'Cajas actualizadas en base de datos.')
-            : Session::setArray('toast', 'Error actualizando cajas en base de datos.');
+            : Session::setArray('toast', 'Error actualizando cajas en base de datos.');*/
 
         return (object)['dir'=>$dir, 'file'=>$file];
     }

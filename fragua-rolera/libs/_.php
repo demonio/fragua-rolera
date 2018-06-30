@@ -51,9 +51,10 @@ class _
         return substr(md5(time().$s), 0, 8);
 	}
 
-    # RETORNA EL VALOR DE LA PROPIEDAD DEL OBJETO O SU CLAVE POST
-    static public function v($o, $k)
+    # RETORNA EL VALOR DE UN OBJETO O MATRIZ O SU CLAVE POST
+    static public function v($x, $k)
     {
+        $o = (object)$x;
         if ( isset($o->$k) ) return $o->$k;
         if ( isset($_POST[$k]) ) return $_POST[$k];
     }

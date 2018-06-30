@@ -37,13 +37,13 @@ class PagesController extends AdminController
     }
 
     #
-    public function read($id)
+    public function read($pages_id)
     {
         View::template('box');
 
-        $this->box = (new Pages)->readOne($id);
+        $this->box = (new Pages)->readOne($pages_id);
         #_::d($this->box);
-        #_::go( "/admin/pages/?" . http_build_query($a) );
+        $this->pages_id = $pages_id;
     }
 
     #
