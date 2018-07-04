@@ -90,12 +90,14 @@ class Pages extends LiteRecord
      */
     public function createFile($post)
     {
+        $app_path = dirname(APP_PATH);
         $dir = $post['dir'];
-        $file_new = $post['file_new'];
+        $file_new = ltrim('/', $post['file_new']);
+        #_::d(dirname("$app_path$dir$file_new"));
+        mkdir(dirname("$app_path$dir$file_new"), 0777, 1);
         $boxes = $this->readBoxes($post);
         $content = Mount::page($boxes);
-        #_::d([dirname(APP_PATH) . "$dir$file_new", $content]);
-        file_put_contents(dirname(APP_PATH) . "$dir$file_new", $content);
+        file_put_contents("$app_path$dir$file_new", $content);
 
         /*$sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';
         $page_boxes = $this->all($sql, [$dir, $file]);
