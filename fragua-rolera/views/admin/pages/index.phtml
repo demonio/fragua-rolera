@@ -1,24 +1,24 @@
 
-<ul class="tabs">
-	<li class="tab"><a href="#boxes">Boxes</a></li>
-	<li class="tab"><a href="#code">Code</a></li>
-	<li class="tab"><a href="#view">View</a></li>
-</ul>
-<input type="text" name="file_new" value="<?=$file?>">
-<div class="row" id="boxes" ondrop="drop(event)" ondragover="dropin(event)" ondragleave="dropout(event)">
-	<?php echo Mount::boxes($page_boxes); ?>
-</div>
-<div id="code">
-	<?php if ( ! preg_match('/gif|png|jpeg|jpg/i', $ext) ) : ?>
-		<pre class="line-numbers"><code class="language-<?=(!$ext or $ext=='phtml')?'php':$ext?>"><?=str_replace('<', '&lt;', $code)?></code></pre>
-		<?php endif; ?>	
-</div>
-<div id="view">
-	<?php if ( preg_match('/gif|png|jpeg|jpg|svg/i', $ext) ) : ?>
-		<img src="<?=strstr($dir, '/img')?><?=$file?>">
-	<?php endif; ?>
-</div>
 <form method="post">
+	<ul class="tabs">
+		<li class="tab"><a href="#boxes">Boxes</a></li>
+		<li class="tab"><a href="#code">Code</a></li>
+		<li class="tab"><a href="#view">View</a></li>
+	</ul>
+	<input type="text" name="file_new" value="<?=$file?>">
+	<div class="row" id="boxes" ondrop="drop(event)" ondragover="dropin(event)" ondragleave="dropout(event)">
+		<?php echo Mount::boxes($page_boxes); ?>
+	</div>
+	<div id="code">
+		<?php if ( ! preg_match('/gif|png|jpeg|jpg/i', $ext) ) : ?>
+			<pre class="line-numbers"><code class="language-<?=(!$ext or $ext=='phtml')?'php':$ext?>"><?=str_replace('<', '&lt;', $code)?></code></pre>
+			<?php endif; ?>	
+	</div>
+	<div id="view">
+		<?php if ( preg_match('/gif|png|jpeg|jpg|svg/i', $ext) ) : ?>
+			<img src="<?=strstr($dir, '/img')?><?=$file?>">
+		<?php endif; ?>
+	</div>
 	<a class="btn blue darken-1" href="/admin/pages/?dir=<?=$dir?>">NEW</a>
 	<button class="btn green darken-1" name="action" value="create_file">CREATE</button>
 	<button class="btn orange darken-1" name="action" value="update_file">UPDATE</button>

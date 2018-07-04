@@ -1,12 +1,15 @@
-
+/* AJUSTES */
 #important .inline { display:inline-block; }
+#important .middle-align { vertical-align:middle; }
 #important .w-auto { width:auto; }
 
+/* MARGEN */
 #important .mb5 { margin-bottom:5px; }
 #important .ml5 { margin-left:5px; }
 #important .mr5 { margin-right:5px; }
 #important .mt10 { margin-top:10px; }
 
+/* SANGRADO */
 #important .pa0 { padding:0; }
 #important .pa5 { padding:5px; }
 #important .pa10 { padding:10px; }

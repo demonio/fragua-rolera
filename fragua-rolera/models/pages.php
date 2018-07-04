@@ -95,6 +95,7 @@ class Pages extends LiteRecord
         $file_new = $post['file_new'];
         $boxes = $this->readBoxes($post);
         $content = Mount::page($boxes);
+        _::d([dirname(APP_PATH) . "$dir$file_new", $content]);
         file_put_contents(dirname(APP_PATH) . "$dir$file_new", $content);
 
         /*$sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';

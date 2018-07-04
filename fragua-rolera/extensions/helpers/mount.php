@@ -38,23 +38,23 @@ class Mount
 			<small class=\"box_width$o->id\" data-toggle2=\".box_width$o->id\">
 				$o->box_width
 			</small>
+		</legend>";
+		/*
 			<form action=\"/admin/pages/width/$o->id\" class=\"box_width$o->id inline w-auto\" data-ajax=\"small.box_width$o->id\" method=\"post\" style=\"display:none\">
 				<input type=\"text\" name=\"box_width\" value=\"$o->box_width\">
 				<button type=\"submit\" data-toggle=\".box_width$o->id\"><i class=\"material-icons tiny\">check</i></button>
 			</form>
-			
-		</legend>";
+		*/
+		if ($o->childrens)
+		{
+			/*if ( strstr($o->code, '{$boxes}') )
+				$content .= str_replace('{$boxes}', Mount::boxes($o->childrens, $a), $o->code);
+			else*/
+				$content .= Mount::boxes($o->childrens, $a);
+		}
 
-			if ($o->childrens)
-			{
-				if ( strstr($o->code, '{$boxes}') )
-					$content .= str_replace('{$boxes}', Mount::boxes($o->childrens, $a), $o->code);
-				else
-					$content .= Mount::boxes($o->childrens, $a);
-			}
-
-			$content .= "
-			<a class=\"delete\" href=\"/admin/pages/delete/$o->id/?dir=$o->dir&file=$o->file\"><i class=\"material-icons red-text right tiny\">close</i></a>
+		$content .= "
+		<a class=\"delete\" href=\"/admin/pages/delete/$o->id/?dir=$o->dir&file=$o->file\"><i class=\"material-icons red-text right tiny\">close</i></a>
 	</fieldset>
 </div>";
         }

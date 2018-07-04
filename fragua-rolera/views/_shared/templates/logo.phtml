@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Grupo creativo Fragua Rolera</title>
-    </head>
-    <body class="row">
-        <?php View::content(); ?> 
-        <script type="text/javascript" src="/javascript/materialize.min.js"></script>
-    </body>
+<html id="important">
+	<head>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection">
+		<?php Css::add('helpers'); ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<?=Css::inc()?>
+	</head>
+	<body>
+		<?php View::content(); ?>
+		<script src="/javascript/materialize.min.js"></script>
+	</body>
 </html>

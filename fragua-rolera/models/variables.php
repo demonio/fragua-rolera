@@ -17,6 +17,7 @@ class Variables extends LiteRecord
     {
         $a = explode('{$', $code);
         array_shift($a);
+        $b = [];
         foreach ($a as $s)
         {
             $k = explode('}', $s, 2)[0];
