@@ -154,16 +154,20 @@ class Pages extends LiteRecord
     
     /**
      */
-    public function deleteFile($post)
+    public function deleteFile($a)
     {
-        $dir = $post['dir'];
-        $file = $post['file'];
-        unlink(dirname(APP_PATH) . "$dir$file");
+        $app_path = dirname(APP_PATH);
+        $dir = $a['dir'];
+        $file = $a['file'];
+        if ($file)
+            unlink("$app_path$dir$file");
+        else
+            rmdir("$app_path$dir");
 
         $sql = "DELETE FROM pages WHERE dir=? AND file=?";
         $this->query($sql, [$dir, $file]);
 
-        return $dir;
+        return ($file) ? $dir : dirname($dir);
     }
     
     /**
