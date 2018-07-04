@@ -91,11 +91,10 @@ class Pages extends LiteRecord
     public function createFile($post)
     {
         $dir = $post['dir'];
-        $file = $post['file'];
         $file_new = $post['file_new'];
         $boxes = $this->readBoxes($post);
         $content = Mount::page($boxes);
-        _::d([dirname(APP_PATH) . "$dir$file_new", $content]);
+        #_::d([dirname(APP_PATH) . "$dir$file_new", $content]);
         file_put_contents(dirname(APP_PATH) . "$dir$file_new", $content);
 
         /*$sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';
@@ -124,10 +123,12 @@ class Pages extends LiteRecord
     {
         $dir = $a['dir'];
         $file = $a['file'];
+        $file_new = $a['file_new'];
 
         $boxes = $this->readBoxes($a);
         $content = Mount::page($boxes);
-        file_put_contents(dirname(APP_PATH) . "$dir$file", $content);
+        file_put_contents(dirname(APP_PATH) . "$dir$file_new", $content);
+        if ($file <> $file_new) $this->deleteFile($a);
 
         /*$sql = 'SELECT * FROM pages WHERE dir=? AND file=? ORDER BY box_weight';
         $page_boxes = $this->all($sql, [$dir, $file]);
@@ -146,7 +147,7 @@ class Pages extends LiteRecord
             ? Session::setArray('toast', 'Cajas actualizadas en base de datos.')
             : Session::setArray('toast', 'Error actualizando cajas en base de datos.');*/
 
-        return (object)['dir'=>$dir, 'file'=>$file];
+        return (object)['dir'=>$dir, 'file'=>$file_new];
     }
     
     /**
