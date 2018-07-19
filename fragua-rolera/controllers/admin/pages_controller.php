@@ -57,9 +57,7 @@ class PagesController extends AdminController
     public function delete($id)
     {
         (new Pages)->deleteOne($id);
-        $url = parse_url($_SERVER['HTTP_REFERER'])['path'];
-        $get = '?' . http_build_query($_GET);
-    	_::go("$url$get");
+    	_::go("/admin/pages/?dir={$_GET['dir']}&file={$_GET['file']}");
     }
 
     #
