@@ -1,3 +1,7 @@
+
+.max-width { height:inherit; margin:0 auto; max-width:1200px; }
+.max-width * { max-width:100%; }
+
 /* AJUSTES */
 #important .inline { display:inline-block; }
 #important .middle-align { vertical-align:middle; }

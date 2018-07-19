@@ -8,7 +8,7 @@ class AdminController extends Controller
     {
         if ( Input::isAjax() ) View::template('');
         else if ($this->controller_name == 'boxes') View::template('boxes');
-        else if ($this->controller_name == 'boxes') View::template('pages');
+        else if ($this->controller_name == 'pages') View::template('pages');
         else View::template('admin');
     }
 

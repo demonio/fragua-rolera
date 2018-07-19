@@ -39,6 +39,7 @@ class Variables extends LiteRecord
         $sql = "INSERT INTO variables (pages_id, k, v) VALUES\n";
         foreach ($a as $k=>$v)
         {
+            $v = h($v);
             $sql .= $s = " ($pages_id, '$k', '$v'),\n";
         }
         $sql = rtrim($sql, ",\n");
